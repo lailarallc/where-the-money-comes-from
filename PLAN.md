@@ -100,3 +100,9 @@ check again.
   - CLAUDE.md template brackets filled in (project description, stack, voice)
 - **Deferred:** None — all findings addressed
 - **Next review:** 2026-06-25 (project active; review every 30 days)
+
+### 2026-09-23 — Audit (health check only)
+- **Findings:** 0 critical, 6 important, 5 nice-to-have
+- **Top concerns:** Chapter 4 labels average contribution per unit as "marginal" (true marginal break-even is ~3.0M units/yr, not 5.3M), and contribution footnotes disagree across chapters and claim freight is subtracted when the pipeline has no freight. Local checkout sits on the merged client-mode-2026-08 branch, 2 commits behind origin/main, and HANDOFF/CLAUDE/DECISIONS/FAILURES predate the client-mode work and org-level secrets. The --seed refresh path yields null units and breaks 03_extract_scenarios.py. Tests: 49/49 vitest, 34/34 pytest, drift gate clean; security, code, and data reviews done manually.
+- **Action taken:** Audit only — no fixes this session
+- **Next review:** 2026-12-22
