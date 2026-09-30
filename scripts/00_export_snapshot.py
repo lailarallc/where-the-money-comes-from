@@ -369,6 +369,8 @@ def _make_query(local_dsn=None):
     Without: shells out to flyctl + parses psql tabular output.
     """
     if local_dsn:
+        import prod_guard  # vendored in scripts/; refuses a fly tunnel to production
+        prod_guard.check(local_dsn)
         import psycopg2
         conn = psycopg2.connect(local_dsn)
         def query(sql):
