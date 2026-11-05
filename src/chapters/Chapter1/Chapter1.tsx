@@ -3,6 +3,7 @@ import * as Plot from '@observablehq/plot'
 import { PlotChart } from '../../components/PlotChart'
 import { DataTable } from '../../components/DataTable'
 import { formatDollars, formatPercent, formatUnits } from '../../utils/format'
+import { displayLabel, displayName } from '../../utils/displayLabel'
 import type { UseChannelSelectionReturn } from '../../hooks/useChannelSelection'
 import channelsData from '../../data/channels.json'
 import './Chapter1.css'
@@ -53,7 +54,7 @@ const VIEW_CONFIG: Record<
     field: 'revenue',
     xLabel: 'Gross Revenue',
     tickFormat: formatDollars,
-    framing: `Walmart accounts for ${walmartRevenuePct} of Cinderhaven's gross revenue. By this measure, the board's conclusion is obvious: Walmart is the business. Keep feeding it.`,
+    framing: `The ${displayLabel('Walmart')} accounts for ${walmartRevenuePct} of Cinderhaven's gross revenue. By this measure, the board's conclusion is obvious: the ${displayLabel('Walmart')} is the business. Keep feeding it.`,
     footnote: 'Source: Cinderhaven FY2024–2026 channel P&L. Revenue shown as gross before trade deductions.',
   },
   contribution_dollars: {
@@ -61,7 +62,7 @@ const VIEW_CONFIG: Record<
     field: 'contribution_dollars',
     xLabel: 'Contribution Dollars',
     tickFormat: formatDollars,
-    framing: `The same data, reframed by what each channel actually leaves in the business. Walmart drops from first in revenue to third in contribution — behind Whole Foods and Kroger. The retail leaders, not distributors, surface as the highest-contribution channels.`,
+    framing: `The same data, reframed by what each channel actually leaves in the business. The ${displayLabel('Walmart')} drops from first in revenue to third in contribution, behind the ${displayLabel('Whole Foods')} and the ${displayLabel('Kroger')}. The retail leaders, not distributors, surface as the highest-contribution channels.`,
     footnote: 'Contribution dollars = gross revenue minus all trade deductions, promo costs, freight, and variable COGS. Fixed overhead excluded.',
   },
   contribution_pct: {
@@ -116,12 +117,12 @@ export function Chapter1({ selection }: Chapter1Props) {
         marks: [
           Plot.barX(sortedData, {
             x: field,
-            y: 'channel',
+            y: (d) => displayName(d.channel),
             sort: { y: '-x' },
             fill: (_d, i) => getHKColor(i, sortedData.length),
             opacity: (d) => selection.getOpacity(d.channel),
             title: (d) =>
-              `${d.channel}: ${
+              `${displayName(d.channel)}: ${
                 activeView === 'contribution_pct'
                   ? formatPercent(d.contribution_margin_pct)
                   : formatDollars(d[field] as number)
@@ -130,7 +131,7 @@ export function Chapter1({ selection }: Chapter1Props) {
           Plot.ruleX([0]),
           Plot.text(sortedData, {
             x: field,
-            y: 'channel',
+            y: (d) => displayName(d.channel),
             text: (d) =>
               activeView === 'contribution_pct'
                 ? formatPercent(d.contribution_margin_pct)
@@ -230,7 +231,7 @@ export function Chapter1({ selection }: Chapter1Props) {
       <DataTable
         caption="Channel revenue and profitability — all metrics"
         columns={[
-          { key: 'channel', label: 'Channel' },
+          { key: 'channel', label: 'Channel', format: (v) => displayName(v as string) },
           { key: 'revenue', label: 'Gross Revenue', format: (v) => formatDollars(v as number) },
           { key: 'contribution_dollars', label: 'Contribution Dollars', format: (v) => formatDollars(v as number) },
           { key: 'contribution_margin_pct', label: 'Contribution Margin %', format: (v) => formatPercent(v as number) },

@@ -3,6 +3,7 @@ import scenariosData from '../../data/scenarios.json'
 import { PlotChart } from '../../components/PlotChart'
 import { DataTable } from '../../components/DataTable'
 import { formatDollars } from '../../utils/format'
+import { displayLabel, relabelText } from '../../utils/displayLabel'
 import './Chapter5.css'
 
 const { capital_allocation } = scenariosData
@@ -12,13 +13,13 @@ const scenarioBars = [
     scenario: capital_allocation.retailer.label,
     incremental_contribution: capital_allocation.retailer.incremental_contribution,
     color: '#b5e4d8',  // HK-85, lightest teal
-    assumption: capital_allocation.retailer.assumption,
+    assumption: relabelText(capital_allocation.retailer.assumption),
   },
   {
     scenario: capital_allocation.distributor.label,
     incremental_contribution: capital_allocation.distributor.incremental_contribution,
     color: '#063d32',  // HK-5, darkest teal
-    assumption: capital_allocation.distributor.assumption,
+    assumption: relabelText(capital_allocation.distributor.assumption),
   },
 ]
 
@@ -91,10 +92,10 @@ export function Chapter5() {
       <div className="ch5-delta-callout">
         <p className="ch5-delta-text">{deltaLabel}</p>
         <p className="ch5-delta-assumption">
-          Retail assumption: {capital_allocation.retailer.assumption}.
+          Retail assumption: {scenarioBars[0].assumption}.
         </p>
         <p className="ch5-delta-assumption">
-          Distribution assumption: {capital_allocation.distributor.assumption}.
+          Distribution assumption: {scenarioBars[1].assumption}.
         </p>
       </div>
 
@@ -118,8 +119,8 @@ export function Chapter5() {
         average channel margins; as Chapter 4 shows, the marginal contribution of a single channel
         erodes as its own volume scales, so these rates describe current channel economics, not the
         yield on the next dollar forced through a channel already at scale. Retail scenario blends
-        Walmart, Kroger, Whole Foods, Sprouts, Costco, and Regional Group. Distribution scenario
-        blends UNFI, KeHE, and DPI Northwest. Figures are based on Cinderhaven's FY2024–2026 channel
+        the {['Walmart', 'Kroger', 'Whole Foods', 'Sprouts', 'Costco'].map(displayLabel).join(', ')}, and
+        Regional Group. Distribution scenario blends {['UNFI', 'KeHE'].map(displayLabel).join(', ')}, and {displayLabel('DPI Northwest')}. Figures are based on Cinderhaven's FY2024–2026 channel
         P&amp;L data.
       </p>
 

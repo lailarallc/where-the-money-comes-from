@@ -6,7 +6,7 @@ describe('Chapter4', () => {
   it('renders the framing prose', () => {
     const { getByText } = render(<Chapter4 />)
     expect(
-      getByText(/More Walmart volume does not mean more contribution/)
+      getByText(/More national mass retailer volume does not mean more contribution/)
     ).toBeTruthy()
   })
 

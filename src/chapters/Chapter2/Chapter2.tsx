@@ -4,6 +4,7 @@ import { PlotChart } from '../../components/PlotChart'
 import { DataTable } from '../../components/DataTable'
 import type { UseChannelSelectionReturn } from '../../hooks/useChannelSelection'
 import { formatDollars } from '../../utils/format'
+import { displayName } from '../../utils/displayLabel'
 import './Chapter2.css'
 
 // Hong Kong teal palette — 8 usable data stops, lightest (HK-85) to darkest (HK-5).
@@ -52,7 +53,7 @@ export function Chapter2({ selection }: { selection: UseChannelSelectionReturn }
       marks: [
         Plot.barX(sortedData, {
           x: xField,
-          y: 'channel',
+          y: (d) => displayName(d.channel),
           sort: { y: 'x' },
           fill: (_d, i) => getHKTeal(i, sortedData.length),
           opacity: (d) => selection.getOpacity(d.channel),
@@ -65,7 +66,7 @@ export function Chapter2({ selection }: { selection: UseChannelSelectionReturn }
         }),
         Plot.text(sortedData, {
           x: xField,
-          y: 'channel',
+          y: (d) => displayName(d.channel),
           text: (d) => xFormat((d as Record<string, number>)[xField]),
           dx: 6,
           textAnchor: 'start',
@@ -126,11 +127,11 @@ export function Chapter2({ selection }: { selection: UseChannelSelectionReturn }
         columns={
           hasPerUnitData
             ? [
-                { key: 'channel', label: 'Channel' },
+                { key: 'channel', label: 'Channel', format: (v) => displayName(v as string) },
                 { key: 'contribution_per_unit', label: 'Contribution per Unit ($)', format: (v) => formatDollars(v as number) },
               ]
             : [
-                { key: 'channel', label: 'Channel' },
+                { key: 'channel', label: 'Channel', format: (v) => displayName(v as string) },
                 { key: 'contribution_margin_pct', label: 'Contribution Margin %', format: (v) => `${((v as number) * 100).toFixed(1)}%` },
               ]
         }

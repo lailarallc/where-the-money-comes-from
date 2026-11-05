@@ -4,6 +4,7 @@ import { PlotChart } from '../../components/PlotChart'
 import { WaterfallChart } from './WaterfallChart'
 import { DataTable } from '../../components/DataTable'
 import { formatDollars } from '../../utils/format'
+import { displayName } from '../../utils/displayLabel'
 import type { UseChannelSelectionReturn } from '../../hooks/useChannelSelection'
 import channelsData from '../../data/channels.json'
 import deductionsData from '../../data/deductions.json'
@@ -61,16 +62,16 @@ export function Chapter3({ selection }: Chapter3Props) {
         marks: [
           Plot.barX(sortedByContribution, {
             x: 'contribution_dollars',
-            y: 'channel',
+            y: (d) => displayName(d.channel),
             sort: { y: '-x' },
             fill: (_d, i) => getHKColor(i, sortedByContribution.length),
             opacity: (d) => selection.getOpacity(d.channel),
-            title: (d) => `${d.channel}: ${formatDollars(d.contribution_dollars)}`,
+            title: (d) => `${displayName(d.channel)}: ${formatDollars(d.contribution_dollars)}`,
           }),
           Plot.ruleX([0]),
           Plot.text(sortedByContribution, {
             x: 'contribution_dollars',
-            y: 'channel',
+            y: (d) => displayName(d.channel),
             text: (d) => formatDollars(d.contribution_dollars),
             dx: 6,
             textAnchor: 'start',
@@ -162,7 +163,7 @@ export function Chapter3({ selection }: Chapter3Props) {
       <DataTable
         caption="Contribution dollars by channel"
         columns={[
-          { key: 'channel', label: 'Channel' },
+          { key: 'channel', label: 'Channel', format: (v) => displayName(v as string) },
           { key: 'contribution_dollars', label: 'Contribution Dollars', format: (v) => formatDollars(v as number) },
         ]}
         data={sortedByContribution as Record<string, unknown>[]}
@@ -172,28 +173,28 @@ export function Chapter3({ selection }: Chapter3Props) {
         <div className="ch3-waterfall-section" data-testid="waterfall-section">
           <h3 className="ch3-waterfall-heading">
             {showSideBySide && comparisonChannel
-              ? `Deduction Structure: ${selected} vs ${comparisonChannel}`
-              : `Deduction Structure: ${selected}`}
+              ? `Deduction Structure: ${displayName(selected)} vs ${displayName(comparisonChannel)}`
+              : `Deduction Structure: ${displayName(selected)}`}
           </h3>
 
           <div className={showSideBySide ? 'ch3-waterfall-grid' : undefined}>
             <WaterfallChart
-              title={selected}
+              title={displayName(selected)}
               steps={getDeductionSteps(selected)}
-              ariaLabel={`Waterfall deduction chart for ${selected}`}
+              ariaLabel={`Waterfall deduction chart for ${displayName(selected)}`}
             />
 
             {showSideBySide && comparisonChannel && (
               <WaterfallChart
-                title={comparisonChannel}
+                title={displayName(comparisonChannel)}
                 steps={getDeductionSteps(comparisonChannel)}
-                ariaLabel={`Waterfall deduction chart for ${comparisonChannel}`}
+                ariaLabel={`Waterfall deduction chart for ${displayName(comparisonChannel)}`}
               />
             )}
           </div>
 
           <DataTable
-            caption={`Deduction waterfall — ${selected}`}
+            caption={`Deduction waterfall: ${displayName(selected)}`}
             columns={[
               { key: 'label', label: 'Line Item' },
               { key: 'value', label: 'Amount', format: (v) => v === 0 ? '—' : formatDollars(v as number) },
@@ -204,7 +205,7 @@ export function Chapter3({ selection }: Chapter3Props) {
 
           {showSideBySide && comparisonChannel && (
             <DataTable
-              caption={`Deduction waterfall — ${comparisonChannel}`}
+              caption={`Deduction waterfall: ${displayName(comparisonChannel)}`}
               columns={[
                 { key: 'label', label: 'Line Item' },
                 { key: 'value', label: 'Amount', format: (v) => v === 0 ? '—' : formatDollars(v as number) },
