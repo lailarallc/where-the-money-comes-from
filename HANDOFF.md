@@ -117,7 +117,7 @@ work.
 
 **Started from:** Arc 1 complete, live site up, first Sonnet session — ran /improve to audit compliance and data integrity.
 
-**Did:** Full /improve pass — 8 findings fixed. Critical: Ch3 waterfall now includes Promo Costs + Dispute Overhead steps; Contribution matches channels.json for all 10 channels (Walmart was $84K off). Typography (Ch1 em dash), Ch3 footnote year FY2024→2026, Ch4 units labeled as model estimate, Ch2 color palette expanded to 8 HK stops, snapshot.db gitignored, README created, CLAUDE.md filled in.
+**Did:** Full /improve pass — 8 findings fixed. Critical: Ch3 waterfall now includes Promo Costs + Dispute Overhead steps; Contribution matches channels.json for all 10 channels (national mass retailer was $84K off). Typography (Ch1 em dash), Ch3 footnote year FY2024→2026, Ch4 units labeled as model estimate, Ch2 color palette expanded to 8 HK stops, snapshot.db gitignored, README created, CLAUDE.md filled in.
 
 **State:** 61/61 tests passing, tsc clean. Netlify not yet redeployed — live site still has old waterfall numbers.
 

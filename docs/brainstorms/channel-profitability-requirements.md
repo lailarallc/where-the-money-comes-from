@@ -74,11 +74,11 @@ Representative Cinderhaven figures:
 
 | Channel          | Per-Unit Contribution |
 |------------------|-----------------------|
-| Walmart          | $0.42                 |
-| KeHE             | $0.78                 |
+| National mass retailer | $0.42                 |
+| Distributor B    | $0.78                 |
 | Food service     | $0.60                 |
-| Costco           | $0.85                 |
-| UNFI / Whole Foods | $0.92               |
+| Club retailer    | $0.85                 |
+| Distributor A / natural grocer | $0.92               |
 | DTC (one-off)    | $4.20                 |
 
 This is the piece's primary shareable image. The chart the CFO screenshots

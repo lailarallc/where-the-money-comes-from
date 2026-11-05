@@ -90,7 +90,7 @@ check again.
 - **Trigger:** User-initiated — first Sonnet session, wanted compliance audit against CLAUDE.md, Lailara spec, and data integrity check
 - **What was reviewed:** All source code, Python pipeline scripts, JSON data files, design token usage, workflow docs
 - **What was fixed:**
-  - Waterfall "Contribution" mismatch — Ch3 waterfall now includes Promo Costs + Dispute Overhead steps; final number matches channels.json across all 10 channels (Walmart gap was $84K)
+  - Waterfall "Contribution" mismatch — Ch3 waterfall now includes Promo Costs + Dispute Overhead steps; final number matches channels.json across all 10 channels (national mass retailer gap was $84K)
   - Chapter 1 heading `--` → `—` (em dash, matches all other chapters)
   - Chapter 3 footnote year corrected from FY2024 to FY2024–2026
   - Chapter 4 "151,000 units" now labeled as model estimate, not presented as fact
