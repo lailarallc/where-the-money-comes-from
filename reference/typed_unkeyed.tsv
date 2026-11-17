@@ -1,0 +1,41 @@
+# Typed figures this repo prints with no canon key (owner, 2026-11-15; plan U19, U22).
+# One row per figure per location. The platform's fleet check holds the row count to a ceiling that only
+# falls: give a figure a key (or stop printing it) and delete its row. listed=yes: the read map names it, and
+# U19 owes its key; listed=no: U22 works it down. Generated from the 2026-11-15 manifest pass.
+file_line	printed	exact_value	meaning	source	kind	listed
+README.md:17	~$54,000 more contribution per $1M	53589	retail minus distribution incremental contribution per $1M revenue, FY2024-2026	src/data/scenarios.json capital_allocation.delta = -53589.0 (sign: distributor minus retailer) (scripts/03_extract_scenarios.py)	repo-export	yes
+README.md:19	10 channels	10	channels modeled (6 retailers, 3 distributors, DTC)	src/data/channels.json list length	repo-export	no
+README.md:19	6 retailers	6	retailer count	reference/canonical_values.json universe.retailers.all_time	prose-only	no
+README.md:19	3 distributors	3	distributor count	reference/canonical_values.json universe.distributors.all_time	prose-only	no
+README.md:34	50 SKUs	50	SKU universe	reference/canonical_values.json universe.skus_total.all_time	prose-only	no
+README.md:34	5 product lines	5	product-line count	reference/canonical_values.json universe.product_lines.all_time	prose-only	no
+README.md:35	6 retailers	6	retailer count	reference/canonical_values.json universe.retailers.all_time	prose-only	no
+README.md:36	3 distributors	3	distributor count	reference/canonical_values.json universe.distributors.all_time	prose-only	no
+README.md:37	1 DTC	1	DTC channel count	prose only	prose-only	no
+src/App.tsx:19	roughly $54,000 more contribution per $1M	53589	retail minus distribution incremental contribution per $1M revenue, FY2024-2026 (hero subtitle)	src/data/scenarios.json capital_allocation.delta	repo-export	yes
+src/chapters/Chapter1/Chapter1.tsx:74	roughly 51 cents per revenue dollar	51	retail blended contribution margin, FY2024-2026	src/data/scenarios.json capital_allocation.retailer.margin_pct = 0.51	repo-export	yes
+src/chapters/Chapter1/Chapter1.tsx:74	Distributors earn 46 cents	45.64	distributor blended contribution margin, FY2024-2026	src/data/scenarios.json capital_allocation.distributor.margin_pct = 0.4564	repo-export	yes
+src/chapters/Chapter1/Chapter1.tsx:74	The 5-point gap	5.36	retail minus distributor margin points	src/data/scenarios.json retailer.margin_pct - distributor.margin_pct	repo-export	no
+src/chapters/Chapter4/Chapter4.tsx:70	roughly 934,000 units a year	934280	Walmart units shipped per year (3-year total / 3)	src/data/channels.json [channel=Walmart].units_shipped / 3 = 2802840/3	repo-export	yes
+src/chapters/Chapter4/Chapter4.tsx:70	about $1.86 in contribution	1.86	Walmart contribution per unit, FY2024-2026	src/data/channels.json [channel=Walmart].contribution_per_unit	repo-export	yes
+src/chapters/Chapter4/Chapter4.tsx:70	2.8 million across the three-year window	2802840	Walmart units shipped, FY2024-2026	src/data/channels.json [channel=Walmart].units_shipped	repo-export	no
+src/chapters/Chapter4/Chapter4.tsx:70	near 5.3 million units a year	5314414	Walmart volume where marginal contribution per unit crosses zero (modeled)	src/data/scenarios.json walmart_inflection_volume	fixed-input	no
+src/chapters/Chapter4/Chapter4.tsx:70	nearly six times current volume	5.69	inflection volume / current annual Walmart units	scenarios.json walmart_inflection_volume / (channels.json Walmart units_shipped / 3)	fixed-input	no
+src/chapters/Chapter4/Chapter4.tsx:82	$3.85 realized wholesale price	3.8495	Walmart realized wholesale price per unit (revenue / units)	src/data/channels.json [Walmart].revenue / .units_shipped = 10789650/2802840	repo-export	yes
+src/chapters/Chapter4/Chapter4.tsx:82	$1.86 contribution per unit	1.86	Walmart contribution per unit	src/data/channels.json [Walmart].contribution_per_unit	repo-export	yes
+src/chapters/Chapter4/Chapter4.tsx:82	2.8M units	2802840	Walmart units shipped, FY2024-2026	src/data/channels.json [Walmart].units_shipped	repo-export	no
+src/chapters/Chapter4/Chapter4.tsx:82	1.8× promotional elasticity	1.8	promotional elasticity of deduction rate to volume	constant scripts/03_extract_scenarios.py:44 PROMO_ELASTICITY	assumption	no
+src/chapters/Chapter5/Chapter5.tsx:107	roughly 51 cents	51	retail blended contribution margin	src/data/scenarios.json capital_allocation.retailer.margin_pct	repo-export	yes
+src/chapters/Chapter5/Chapter5.tsx:107	Distribution returns 46 cents	45.64	distributor blended contribution margin	src/data/scenarios.json capital_allocation.distributor.margin_pct	repo-export	yes
+src/data/scenarios.json:11	margin_pct: 0.4564	45.64	distributor blended contribution margin	scripts/03_extract_scenarios.py	repo-export	no
+src/data/scenarios.json:15	delta: -53589.0	-53589	distributor minus retailer incremental contribution per $1M revenue (rendered in Chapter 5 headline)	scripts/03_extract_scenarios.py from fct_* marts via snapshot.db	repo-export	no
+src/data/scenarios.json:16	delta_pct: -0.1051	-10.51	relative contribution delta per revenue dollar (rendered Chapter 5)	scripts/03_extract_scenarios.py	repo-export	no
+src/data/scenarios.json:5	margin_pct: 0.51	51	retail blended contribution margin	scripts/03_extract_scenarios.py	repo-export	no
+src/data/scenarios.json:68	walmart_inflection_volume: 5314414	5314414	Walmart zero-marginal-contribution volume (modeled)	scripts/03_extract_scenarios.py (PROMO_ELASTICITY 1.8 over channels.json anchor)	fixed-input	no
+tests/test_canonical_regression.py:105	0.45 < margin < 0.55	49.56	blended contribution margin, 10 channels FY2024-2026 (asserted within 45-55%)	channels.json sum(contribution_dollars)/sum(revenue)	repo-export	no
+tests/test_canonical_regression.py:129	10	10	channels in snapshot.db (asserted)	untracked data/snapshot.db	warehouse-query	no
+tests/test_canonical_regression.py:55	10	10	channel count (asserted)	src/data/channels.json length	repo-export	no
+tests/test_canonical_regression.py:99	49.01%	49.01	canonical commercial contribution margin, all time (docstring)	reference/canonical_values.json margin.contribution_commercial_pct.all_time	prose-only	no
+tests/test_demo_golden.py:42	10	10	channel count (asserted)	src/data/channels.json length	repo-export	no
+tests/test_demo_golden.py:48	8.73	8.73	DTC contribution per unit, FY2024-2026 (asserted)	src/data/channels.json [channel=DTC].contribution_per_unit (line 90)	repo-export	yes
+tests/test_prose_data.py:224	51.0% vs distributor 45.6%	51	retail blended margin (docstring; distributor 45.6)	src/data/scenarios.json capital_allocation.*.margin_pct	repo-export	yes
